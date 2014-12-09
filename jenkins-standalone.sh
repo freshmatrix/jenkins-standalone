@@ -36,9 +36,9 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-# Accept ZooKeeper paths on the command line
-if [[ ! $# > 3 ]]; then
-    echo "Usage: $0 -z zk://10.132.188.212:2181[, ... ]/mesos -r redis.example.com"
+# Accept Redis paths on the command line
+if [[ ! $# > 1 ]]; then
+    echo "Usage: $0 -r redis.example.com"
     echo
     exit 1
 fi
@@ -47,10 +47,6 @@ while [[ $# > 1 ]]; do
     key="$1"
     shift
     case $key in
-        -z|--zookeeper)
-            ZOOKEEPER_PATHS="$1"
-            shift
-            ;;
         -r|--redis-host)
             REDIS_HOST="$1"
             shift
@@ -76,7 +72,6 @@ for plugin in ${JENKINS_PLUGINS[@]}; do
 done
 
 # Jenkins config files
-sed -i "s!_MAGIC_ZOOKEEPER_PATHS!${ZOOKEEPER_PATHS}!" config.xml
 sed -i "s!_MAGIC_REDIS_HOST!${REDIS_HOST}!" jenkins.plugins.logstash.LogstashInstallation.xml
 sed -i "s!_MAGIC_JENKINS_URL!http://${HOST}:${PORT}!" jenkins.model.JenkinsLocationConfiguration.xml
 

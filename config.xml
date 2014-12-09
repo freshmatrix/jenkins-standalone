@@ -5,7 +5,7 @@
     <string>hudson.diagnosis.ReverseProxySetupMonitor</string>
     <string>jenkins.diagnostics.SecurityIsOffMonitor</string>
   </disabledAdministrativeMonitors>
-  <numExecutors>0</numExecutors>
+  <numExecutors>8</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
@@ -17,30 +17,7 @@
   <jdks/>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
-  <clouds>
-    <org.jenkinsci.plugins.mesos.MesosCloud plugin="mesos">
-      <name>MesosCloud</name>
-      <nativeLibraryPath>/usr/local/lib/libmesos.so</nativeLibraryPath>
-      <master>_MAGIC_ZOOKEEPER_PATHS</master>
-      <description></description>
-      <frameworkName>Jenkins Scheduler</frameworkName>
-      <checkpoint>false</checkpoint>
-      <onDemandRegistration>false</onDemandRegistration>
-      <slaveInfos>
-        <org.jenkinsci.plugins.mesos.MesosSlaveInfo>
-          <slaveCpus>0.1</slaveCpus>
-          <slaveMem>512</slaveMem>
-          <executorCpus>0.1</executorCpus>
-          <maxExecutors>2</maxExecutors>
-          <executorMem>128</executorMem>
-          <remoteFSRoot>jenkins</remoteFSRoot>
-          <idleTerminationMinutes>3</idleTerminationMinutes>
-          <jvmArgs>-Xms16m -XX:+UseConcMarkSweepGC -Djava.net.preferIPv4Stack=true</jvmArgs>
-          <labelString>mesos</labelString>
-        </org.jenkinsci.plugins.mesos.MesosSlaveInfo>
-      </slaveInfos>
-    </org.jenkinsci.plugins.mesos.MesosCloud>
-  </clouds>
+  <clouds/>
   <slaves/>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>3</scmCheckoutRetryCount>
