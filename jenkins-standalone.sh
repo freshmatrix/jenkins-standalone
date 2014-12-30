@@ -5,6 +5,7 @@ set -e
 JENKINS_VERSION="1.580.2"
 
 # List of Jenkins plugins, in the format "${PLUGIN_NAME}/${PLUGIN_VERSION}"
+#    "logstash/1.0.3"             \
 JENKINS_PLUGINS=(\
     "credentials/1.18"           \
     "email-ext/2.39"             \
@@ -12,7 +13,6 @@ JENKINS_PLUGINS=(\
     "git-client/1.12.0"          \
     "greenballs/1.14"            \
     "hipchat/0.1.8"              \
-    "logstash/1.0.3"             \
     "metadata/1.1.0b"            \
     "mesos/0.5.0"                \
     "monitoring/1.54.0"          \
@@ -37,8 +37,9 @@ if [[ $? != 0 ]]; then
 fi
 
 # Accept ZooKeeper paths on the command line
-if [[ ! $# > 3 ]]; then
-    echo "Usage: $0 -z zk://10.132.188.212:2181[, ... ]/mesos -r redis.example.com"
+if [[ ! $# > 1 ]]; then
+#    echo "Usage: $0 -z zk://10.132.188.212:2181[, ... ]/mesos -r redis.example.com"
+    echo "Usage: $0 -z zk://10.132.188.212:2181[, ... ]/mesos"
     echo
     exit 1
 fi
@@ -77,7 +78,7 @@ done
 
 # Jenkins config files
 sed -i "s!_MAGIC_ZOOKEEPER_PATHS!${ZOOKEEPER_PATHS}!" config.xml
-sed -i "s!_MAGIC_REDIS_HOST!${REDIS_HOST}!" jenkins.plugins.logstash.LogstashInstallation.xml
+#sed -i "s!_MAGIC_REDIS_HOST!${REDIS_HOST}!" jenkins.plugins.logstash.LogstashInstallation.xml
 sed -i "s!_MAGIC_JENKINS_URL!http://${HOST}:${PORT}!" jenkins.model.JenkinsLocationConfiguration.xml
 
 # Start the master
