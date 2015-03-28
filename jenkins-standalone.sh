@@ -82,11 +82,12 @@ sed -i "s!_MAGIC_ZOOKEEPER_PATHS!${ZOOKEEPER_PATHS}!" config.xml
 sed -i "s!_MAGIC_JENKINS_URL!http://${HOST}:${PORT}!" jenkins.model.JenkinsLocationConfiguration.xml
 
 # Start the master
+# instead of ${PORT}, try hard coded 8080 with Marathon payload port specified instead
 export JENKINS_HOME="$(pwd)"
 java -jar jenkins.war \
     -Djava.awt.headless=true \
     --webroot=war \
-    --httpPort=${PORT} \
+    --httpPort=8080 \
     --ajp13Port=-1 \
     --httpListenAddress=0.0.0.0 \
     --ajp13ListenAddress=127.0.0.1 \
