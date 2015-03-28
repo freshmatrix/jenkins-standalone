@@ -85,8 +85,8 @@ sed -i "s!_MAGIC_JENKINS_URL!http://${HOST}:8080!" jenkins.model.JenkinsLocation
 #   instead of ${PORT}, try hard coded 8080 with Marathon payload port specified instead
 #  define JENKINS_HOME with persistent volume. set ENV via Marathon
 #   export JENKINS_HOME="$(pwd)"
-if [ -z "$JENKINS_HOME" ]
-  export JENKINS_HOME="$(pwd)"
+if [[ -z "$JENKINS_HOME" ]]; then
+    export JENKINS_HOME="$(pwd)"
 fi
 
 java -jar jenkins.war \
